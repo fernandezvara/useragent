@@ -15,6 +15,8 @@ func Test_Parses(t *testing.T) {
 		platformID     int
 		browserID      int
 		browserVersion string
+		botID          int
+		botVersion     string
 		osID           int
 		osVersion      string
 		mobile         bool
@@ -470,23 +472,542 @@ func Test_Parses(t *testing.T) {
 			mobile:         true,
 			bot:            false,
 		},
+
+		// uc browser
+
+		{
+			ua:             "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-CN; EML-AL00 Build/HUAWEIEML-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.108 baidu.sogo.uc.UCBrowser/11.9.4.974 UWS/2.13.1.48 Mobile Safari/537.36 AliApp(DingTalk/4.5.11) com.alibaba.android.rimet/10487439 Channel/227200 language/zh-CN",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      12,
+			browserVersion: "11.9.4.974",
+			osID:           7,
+			osVersion:      "8.1.0",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Linux; U; Android 6.0.1; zh-CN; F5121 Build/34.0.A.1.247) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/40.0.2214.89 UCBrowser/11.5.1.944 Mobile Safari/537.36",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      12,
+			browserVersion: "11.5.1.944",
+			osID:           7,
+			osVersion:      "6.0.1",
+			mobile:         true,
+			bot:            false,
+		},
+
+		{
+			ua:             "UCWEB/2.0 (Linux; U; Opera Mini/7.1.32052/30.3697; en-US; Lenny4 Build/NRD90M) U2/1.0.0 UCMini/10.9.0.946 (SpeedMode; Android 7.0; Lenny4 Build/NRD90M) Mobile",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      12,
+			browserVersion: "10.9.0.946",
+			osID:           7,
+			osVersion:      "7.0",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// silk
+		{
+			ua:             "Mozilla/5.0 (Linux; Android 9; KFGIWI) AppleWebKit/537.36 (KHTML, like Gecko) Silk/96.1.237 like Chrome/96.0.4664.128 Safari/537.36",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      13,
+			browserVersion: "96.1.237",
+			osID:           7,
+			osVersion:      "9",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Silk/96.2.20 like Chrome/96.0.4664.175 Safari/537.36",
+			deviceID:       2,
+			platformID:     2,
+			browserID:      13,
+			browserVersion: "96.2.20",
+			osID:           2,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.0.143.1-Gen4_11004910) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true",
+			deviceID:       2,
+			platformID:     4,
+			browserID:      13,
+			browserVersion: "1.0.143.14.11004910",
+			osID:           3,
+			osVersion:      "10.6.3",
+			mobile:         false,
+			bot:            false,
+		},
+
+		{ // nokia browser
+			ua:             "Mozilla/5.0 (Linux; Android 4.1.2; Nokia_X Build/JZO54K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36 NokiaBrowser/1.2.0.12",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      14,
+			browserVersion: "1.2.0.12",
+			osID:           7,
+			osVersion:      "4.1.2",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (SymbianOS/9.3; Series60/3.2 NokiaE5-00/101.003; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.3.1.35 Mobile Safari/533.4 3gpp-gba",
+			deviceID:       4,
+			platformID:     8,
+			browserID:      14,
+			browserVersion: "7.3.1.35",
+			osID:           10,
+			osVersion:      "9.3",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Symbian/3; Series60/5.3 Nokia500/111.021.0028; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/535.1 (KHTML, like Gecko) NokiaBrowser/8.3.1.4 Mobile Safari/535.1 3gpp-gba",
+			deviceID:       4,
+			platformID:     8,
+			browserID:      14,
+			browserVersion: "8.3.1.4",
+			osID:           10,
+			osVersion:      "3",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// playstation
+		{
+			ua:             "Mozilla/5.0 (PLAYSTATION 3 4.80) AppleWebKit/531.22.8 (KHTML, like Gecko)",
+			deviceID:       7,
+			platformID:     10,
+			browserID:      15,
+			browserVersion: "",
+			osID:           12,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/4.0 (PSP (PlayStation Portable); 2.00)",
+			deviceID:       8,
+			platformID:     10,
+			browserID:      15,
+			browserVersion: "",
+			osID:           12,
+			osVersion:      "",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// webos
+		{
+			ua:             "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.34 Safari/537.36 DMOST/1.0.1 (; LGE; webOSTV; WEBOS4.1.0 04.10.40; W4_lm18a;)",
+			deviceID:       6,
+			platformID:     10,
+			browserID:      1,
+			browserVersion: "53.0.2785.34",
+			osID:           11,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+
+		// xbox
+		{
+			ua:             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox One) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299",
+			deviceID:       7,
+			platformID:     10,
+			browserID:      8,
+			browserVersion: "16.16299",
+			osID:           13,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+
+		// nintendo
+		{
+			ua:             "Mozilla/5.0 (Nintendo Switch; WifiWebAuthApplet) AppleWebKit/606.4 (KHTML, like Gecko) NF/6.0.1.18.3 NintendoBrowser/5.1.0.21481",
+			deviceID:       7,
+			platformID:     10,
+			browserID:      16,
+			browserVersion: "5.1.0.21481",
+			osID:           14,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+
+		{
+			ua:             "Mozilla/5.0 (Nintendo WiiU) AppleWebKit/536.28 (KHTML, like Gecko) NX/3.0.3.12.14 NintendoBrowser/3.1.1.9577.EU",
+			deviceID:       7,
+			platformID:     10,
+			browserID:      16,
+			browserVersion: "3.1.1.9577",
+			osID:           14,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+
+		// qq browser
+		{
+			ua:             "Mozilla/5.0 (Linux; U; Android 4.4.2; zh-cn; GT-I9500 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 MQQBrowser/5.0 QQ-URL-Manager Mobile Safari/537.36",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      17,
+			browserVersion: "5.0",
+			osID:           7,
+			osVersion:      "4.4.2",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3756.400 QQBrowser/10.5.4043.400",
+			deviceID:       2,
+			platformID:     3,
+			browserID:      17,
+			browserVersion: "10.5.4043.400",
+			osID:           6,
+			osVersion:      "10.0",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36 QQBrowser/3.8.3858.400",
+			deviceID:       2,
+			platformID:     4,
+			browserID:      17,
+			browserVersion: "3.8.3858.400",
+			osID:           3,
+			osVersion:      "10.10.5",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (iPhone 84; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 MQQBrowser/7.8.0 Mobile/14G60 Safari/8536.25 MttCustomUA/2 QBWebViewType/1 WKType/1",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      17,
+			browserVersion: "7.8.0",
+			osID:           4,
+			osVersion:      "10.3.3",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// maxthon
+		{
+			ua:             "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon)",
+			deviceID:       2,
+			platformID:     3,
+			browserID:      18,
+			browserVersion: "",
+			osID:           6,
+			osVersion:      "5.1",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.4.600 Chrome/30.0.1599.101 Safari/537.36",
+			deviceID:       2,
+			platformID:     3,
+			browserID:      18,
+			browserVersion: "4.4.4.600",
+			osID:           6,
+			osVersion:      "6.1",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/607.2.6 (KHTML, like Gecko) Version/12.1.1 Safari/607.2.6 Maxthon/5.1.132",
+			deviceID:       2,
+			platformID:     4,
+			browserID:      18,
+			browserVersion: "5.1.132",
+			osID:           3,
+			osVersion:      "10.14.5",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (X11; Linux x86_64; Linux Mint 17.1 Rebecca) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.0 Maxthon/1.0.5.3 Safari/537.36",
+			deviceID:       2,
+			platformID:     2,
+			browserID:      18,
+			browserVersion: "1.0.5.3",
+			osID:           2,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (iPhone; U; CPU iPhone OS 2_2 like Mac OS X; en-us)Maxthon AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5G77 Safari/525.20",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      18,
+			browserVersion: "",
+			osID:           4,
+			osVersion:      "2.2",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// spotify
+		{
+			ua:             "Spotify/8.6.98 iOS/15.2.1 (iPhone13,1)",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      19,
+			browserVersion: "8.6.98",
+			osID:           4,
+			osVersion:      "15.2.1",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Spotify/8.6.98.900 Android/31 (SM-G986B)",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      19,
+			browserVersion: "8.6.98.900",
+			osID:           7,
+			osVersion:      "",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// samsung browser
+		{
+			ua:             "Mozilla/5.0 (Linux; Android 12; SAMSUNG SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/16.0 Chrome/92.0.4515.166 Mobile Safari/537.36",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      20,
+			browserVersion: "16.0",
+			osID:           7,
+			osVersion:      "12",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/16.0 Chrome/92.0.4515.166 Safari/537.36",
+			deviceID:       2,
+			platformID:     2,
+			browserID:      20,
+			browserVersion: "16.0",
+			osID:           2,
+			osVersion:      "",
+			mobile:         false,
+			bot:            false,
+		},
+
+		// yandex
+		{
+			ua:             "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 YaBrowser/17.4.3.195.10 Mobile/14A346 Safari/E7FBAF",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      21,
+			browserVersion: "17.4.3.195.10",
+			osID:           4,
+			osVersion:      "10.0",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 YaBrowser/17.6.1.749 Yowser/2.5 Safari/537.36",
+			deviceID:       2,
+			platformID:     3,
+			browserID:      21,
+			browserVersion: "17.6.1.749",
+			osID:           6,
+			osVersion:      "6.3",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (iPad; CPU OS 10_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 YaBrowser/17.4.2.162.11 Mobile/14A346 Safari/E7FBAF",
+			deviceID:       3,
+			platformID:     5,
+			browserID:      21,
+			browserVersion: "17.4.2.162.11",
+			osID:           4,
+			osVersion:      "10.0",
+			mobile:         true,
+			bot:            false,
+		},
+
+		// coc coc browsers
+		{
+			ua:             "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/98.0.168 Chrome/92.0.4515.168 Safari/537.36",
+			deviceID:       2,
+			platformID:     3,
+			browserID:      22,
+			browserVersion: "98.0.168",
+			osID:           6,
+			osVersion:      "10.0",
+			mobile:         false,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) coc_coc_browser/89.0.70 CriOS/83.0.4103.70 Mobile/15E148 Safari/604.1",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      22,
+			browserVersion: "89.0.70",
+			osID:           4,
+			osVersion:      "15.1",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Linux; Android 11; Redmi Note 8) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/97.0.197 Mobile Chrome/91.0.4472.197 Mobile Safari/537.36",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      22,
+			browserVersion: "97.0.197",
+			osID:           7,
+			osVersion:      "11",
+			mobile:         true,
+			bot:            false,
+		},
+		{
+			ua:             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/56.3.134 Chrome/50.3.2661.134 Safari/537.36",
+			deviceID:       2,
+			platformID:     4,
+			browserID:      22,
+			browserVersion: "56.3.134",
+			osID:           3,
+			osVersion:      "10.12.6",
+			mobile:         false,
+			bot:            false,
+		},
+
+		// bots
+
+		// applebot
+		{
+			ua:             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5 (Applebot/0.1; +http://www.apple.com/go/applebot)",
+			deviceID:       2,
+			platformID:     4,
+			browserID:      3,
+			browserVersion: "8.0.2",
+			botID:          2,
+			botVersion:     "0.1",
+			osID:           3,
+			osVersion:      "10.10.1",
+			mobile:         false,
+			bot:            true,
+		},
+		// baidubot
+		{
+			ua:             "Baiduspider+(+http://www.baidu.com/search/spider_jp.html)",
+			deviceID:       1,
+			platformID:     1,
+			browserID:      0,
+			browserVersion: "",
+			botID:          3,
+			botVersion:     "",
+			osID:           1,
+			osVersion:      "",
+			mobile:         false,
+			bot:            true,
+		},
+		{
+			ua:             "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)",
+			deviceID:       1,
+			platformID:     1,
+			browserID:      0,
+			browserVersion: "",
+			botID:          3,
+			botVersion:     "2.0",
+			osID:           1,
+			osVersion:      "",
+			mobile:         false,
+			bot:            true,
+		},
+		{
+			ua:             "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)",
+			deviceID:       1,
+			platformID:     1,
+			browserID:      0,
+			browserVersion: "",
+			botID:          3,
+			botVersion:     "2.0",
+			osID:           1,
+			osVersion:      "",
+			mobile:         false,
+			bot:            true,
+		},
+		{
+			ua:             "Mozilla/5.0 (Linux;u;Android 4.2.2;zh-cn;) AppleWebKit/534.46 (KHTML,like Gecko) Version/5.1 Mobile Safari/10600.6.3 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      9, // tags are like safari (versio+safari), but android does not have safari, so fake browser
+			browserVersion: "",
+			botID:          3,
+			botVersion:     "2.0",
+			osID:           7,
+			osVersion:      "4.2.2",
+			mobile:         true,
+			bot:            true,
+		},
+		{
+			ua:             "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)",
+			deviceID:       4,
+			platformID:     6,
+			browserID:      3,
+			browserVersion: "9.0",
+			botID:          3,
+			botVersion:     "2.0",
+			osID:           4,
+			osVersion:      "9.1",
+			mobile:         true,
+			bot:            true,
+		},
 	}
 
 	for _, testCase := range testCases {
 		ua := Parse(testCase.ua)
-		fmt.Println(ua)
-		assert.Equal(t, testCase.deviceID, ua.Device().ID())
-		assert.Equal(t, Devices[testCase.deviceID], ua.Device().String())
-		assert.Equal(t, testCase.platformID, ua.Platform().ID())
-		assert.Equal(t, Platforms[testCase.platformID], ua.Platform().String())
-		assert.Equal(t, testCase.browserID, ua.Browser().ID())
-		assert.Equal(t, Browsers[testCase.browserID], ua.Browser().String())
-		assert.Equal(t, testCase.browserVersion, ua.Browser().Version())
-		assert.Equal(t, testCase.osID, ua.OS().ID())
-		assert.Equal(t, OSs[testCase.osID], ua.OS().String())
-		assert.Equal(t, testCase.osVersion, ua.OS().Version())
-		assert.Equal(t, testCase.mobile, ua.Mobile())
-		assert.Equal(t, testCase.bot, ua.Bot())
+
+		testFuncs := map[string]bool{
+			// test devices
+			"ua.Device().ID()":     assert.Equal(t, testCase.deviceID, ua.Device().ID()),
+			"ua.Device().String()": assert.Equal(t, Devices[testCase.deviceID], ua.Device().String()),
+			// test platforms
+			"ua.Platform().ID()":     assert.Equal(t, testCase.platformID, ua.Platform().ID()),
+			"ua.Platform().String()": assert.Equal(t, Platforms[testCase.platformID], ua.Platform().String()),
+			// test browsers
+			"ua.Browser().ID()":       assert.Equal(t, testCase.browserID, ua.Browser().ID()),
+			"ua.Browser().String()":   assert.Equal(t, Browsers[testCase.browserID], ua.Browser().String()),
+			"ua.Browser().Version()":  assert.Equal(t, testCase.browserVersion, ua.Browser().Version()),
+			"ua.Browser().IsBot()":    assert.Equal(t, testCase.bot, ua.Browser().IsBot()),
+			"ua.Browser().IsMobile()": assert.Equal(t, testCase.mobile, ua.Browser().IsMobile()),
+			// test bot
+			"ua.Bot().ID()":      assert.Equal(t, testCase.botID, ua.Bot().ID()),
+			"ua.Bot().String()":  assert.Equal(t, Bots[testCase.botID], ua.Bot().String()),
+			"ua.Bot().Version()": assert.Equal(t, testCase.botVersion, ua.Bot().Version()),
+			"ua.Bot().IsBot()":   assert.Equal(t, testCase.bot, ua.Bot().IsBot()),
+			// test os
+			"ua.OS().ID()":      assert.Equal(t, testCase.osID, ua.OS().ID()),
+			"ua.OS().String()":  assert.Equal(t, OSs[testCase.osID], ua.OS().String()),
+			"ua.OS().Version()": assert.Equal(t, testCase.osVersion, ua.OS().Version()),
+			// test booleans
+			"ua.IsMobile()": assert.Equal(t, testCase.mobile, ua.IsMobile()),
+			"ua.IsBot()":    assert.Equal(t, testCase.bot, ua.IsBot()),
+		}
+
+		for key, value := range testFuncs {
+			// on error...
+			if !value {
+				fmt.Printf("----- ERROR: %s -----\n", key)
+				fmt.Println("in:", testCase)
+				fmt.Println("out:", ua)
+			}
+		}
 
 	}
 
