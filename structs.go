@@ -15,32 +15,32 @@ type UserAgent struct {
 }
 
 var Devices = []string{
-	"Unknown",
-	"Bot",
-	"Computer",
-	"Tablet",
-	"Phone",
-	"Wearable",
-	"TV",
-	"Console",
-	"Portable Console",
+	"Unknown",          // 0
+	"Bot",              // 1
+	"Computer",         // 2
+	"Tablet",           // 3
+	"Phone",            // 4
+	"Wearable",         // 5
+	"TV",               // 6
+	"Console",          // 7
+	"Portable Console", // 8
 }
 
 var Platforms = []string{
-	"Unknown",
-	"Bot",
-	"Linux",
-	"Windows",
-	"Mac",
-	"iPad",
-	"iPhone",
-	"iPod",
-	"Blackberry",
-	"WindowsPhone",
-	"Playstation",
-	"Xbox",
-	"Nintendo",
-	"TV",
+	"Unknown",      // 0
+	"Bot",          // 1
+	"Linux",        // 2
+	"Windows",      // 3
+	"Mac",          // 4
+	"iPad",         // 5
+	"iPhone",       // 6
+	"iPod",         // 7
+	"Blackberry",   // 8
+	"WindowsPhone", // 9
+	"Playstation",  // 10
+	"Xbox",         // 11
+	"Nintendo",     // 12
+	"TV",           // 13
 }
 
 var Browsers = []string{
@@ -67,6 +67,7 @@ var Browsers = []string{
 	"Samsung",              // 20
 	"Yandex",               // 21
 	"CocCoc",               // 22
+	"cURL",                 // 23
 }
 
 var Bots = []string{
@@ -88,21 +89,21 @@ var Bots = []string{
 }
 
 var OSs = []string{
-	"Unknown",
-	"Bot",
-	"Linux",
-	"MacOSX",
-	"iOS",
-	"WindowsPhone",
-	"Windows",
-	"Android",
-	"Blackberry",
-	"ChromeOS",
-	"Symbian",
-	"WebOS",
-	"Playstation",
-	"Xbox",
-	"Nintendo",
+	"Unknown",      // 0
+	"Bot",          // 1
+	"Linux",        // 2
+	"MacOSX",       // 3
+	"iOS",          // 4
+	"WindowsPhone", // 5
+	"Windows",      // 6
+	"Android",      // 7
+	"Blackberry",   // 8
+	"ChromeOS",     // 9
+	"Symbian",      // 10
+	"WebOS",        // 11
+	"Playstation",  // 12
+	"Xbox",         // 13
+	"Nintendo",     // 14
 }
 
 func (u UserAgent) Device() device {

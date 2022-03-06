@@ -118,9 +118,19 @@ func (u *UserAgent) parseOS() bool {
 		u.platformID = 10
 		u.osID = 14
 	default:
+
+		// corner cases
+		if strings.Contains(u.input, "linux-gnu") {
+			u.deviceID = 2
+			u.platformID = 2
+			u.osID = 2
+			return true
+		}
+
 		// os not detected
 		return false
 	}
+
 	return true
 }
 
@@ -201,6 +211,9 @@ func (u *UserAgent) parseLinux() {
 	case u.includes("samsungbrowser"):
 		u.browserVersion = u.partsMap["samsungbrowser"]
 		u.browserID = 20
+	case u.includes("safari") && u.includes("version"):
+		u.browserVersion = u.partsMap["version"]
+		u.browserID = 3
 	case u.includes("chrome"):
 		u.browserVersion = u.partsMap["chrome"]
 		u.browserID = 1
@@ -211,6 +224,7 @@ func (u *UserAgent) parseLinux() {
 		// 	u.browserVersion = u.partsMap["edg"]
 		// 	u.browserID = 8
 	}
+
 }
 
 func (u *UserAgent) parseiOs() {
@@ -239,7 +253,7 @@ func (u *UserAgent) parseiOs() {
 		u.browserID = 1
 	case u.includes("fxios"):
 		u.browserVersion = u.partsMap["fxios"]
-		u.browserID = 3
+		u.browserID = 4
 	case u.includes("opt"):
 		u.browserVersion = u.partsMap["opt"]
 		u.browserID = 6
@@ -406,7 +420,15 @@ func (u *UserAgent) parseOtherBrowsers() {
 				}
 			}
 		}
-
+	case u.includes("curl"):
+		u.browserVersion = u.partsMap["curl"]
+		u.browserID = 23
+	case u.includes("libcurl"):
+		u.browserVersion = u.partsMap["libcurl"]
+		u.browserID = 23
+	case u.includes("pycurl"):
+		u.browserVersion = u.partsMap["pycurl"]
+		u.browserID = 23
 	}
 }
 
@@ -428,6 +450,36 @@ func (u *UserAgent) parseBot() bool {
 		u.botID = 3
 		u.bot = true
 		u.botVersion = u.partsMap["baiduspider-render"]
+	case u.includes("bingbot"):
+		u.botID = 4
+		u.bot = true
+		u.botVersion = u.partsMap["bingbot"]
+	case u.includes("duckduckgo"):
+		u.botID = 5
+		u.bot = true
+		u.botVersion = u.partsMap["duckduckgo"]
+	case u.includes("duckduckbot"):
+		u.botID = 5
+		u.bot = true
+		u.botVersion = u.partsMap["duckduckbot"]
+	case u.includes("facebookexternalhit"):
+		u.botID = 6
+		u.bot = true
+		u.botVersion = u.partsMap["facebookexternalhit"]
+	case u.includes("googlebot"):
+		u.botID = 7
+		u.bot = true
+		u.botVersion = u.partsMap["googlebot"]
+	case u.includes("linkedinbot"):
+		u.botID = 8
+		u.bot = true
+		u.botVersion = u.partsMap["linkedinbot"]
+	}
+
+	// duck duck bot is way unpredectible...
+	if strings.Contains(u.input, "duckduck") && !u.includes("duckduckgo") {
+		u.botID = 5
+		u.bot = true
 	}
 
 	if u.bot && u.deviceID == 0 {

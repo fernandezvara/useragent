@@ -43,15 +43,30 @@ func partsToMap(input string) map[string]string {
 		if strings.Contains(part, "/") {
 			this := strings.Split(part, "/")
 			if len(this) == 2 {
-				parts[this[0]] = cleanVersion(this[1])
+				parts = set(parts, this[0], cleanVersion(this[1]))
 			}
 		} else {
-			parts[part] = ""
+			parts = set(parts, part, "")
 		}
 
 	}
 
 	return parts
+}
+
+// set verifies if the part already exists and if exists but is blank then sets it
+func set(data map[string]string, key, value string) map[string]string {
+
+	if _, ok := data[key]; ok {
+		// set it only if blank
+		if data[key] == "" {
+			data[key] = value
+		}
+	} else {
+		data[key] = value
+	}
+
+	return data
 }
 
 // split on each parenthesis, ; or space
