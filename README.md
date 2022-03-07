@@ -1,5 +1,7 @@
 # User-Agent parser
 
+[![Coverage Status](https://coveralls.io/repos/github/fernandezvara/useragent/badge.svg?branch=main)](https://coveralls.io/github/fernandezvara/useragent?branch=main)
+
 This package parses the browser **User-Agent** received getting (with the best effort) this information (when possible):
 
 - Platform
