@@ -122,8 +122,8 @@ func (u UserAgent) Bot() bot {
 	return bot{id: u.botID, version: u.botVersion, bot: u.bot}
 }
 
-func (u UserAgent) OS() os {
-	return os{id: u.osID, version: u.osVersion}
+func (u UserAgent) OS() osStruct {
+	return osStruct{id: u.osID, version: u.osVersion}
 }
 
 func (u UserAgent) IsMobile() bool {
@@ -207,19 +207,19 @@ func (b bot) IsBot() bool {
 	return b.bot
 }
 
-type os struct {
+type osStruct struct {
 	id      int
 	version string
 }
 
-func (o os) ID() int {
+func (o osStruct) ID() int {
 	return o.id
 }
 
-func (o os) String() string {
+func (o osStruct) String() string {
 	return OSs[o.id]
 }
 
-func (o os) Version() string {
+func (o osStruct) Version() string {
 	return o.version
 }

@@ -938,7 +938,7 @@ func Test_Parses(t *testing.T) {
 			bot:            false,
 		},
 		{
-			ua:             "curl/7.21.0 (i486-pc-linux-gnu) libcurl/7.21.0 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.15 libssh2/1.2.6",
+			ua:             "libcurl/7.21.0 (i486-pc-linux-gnu) OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.15 libssh2/1.2.6",
 			deviceID:       2,
 			platformID:     2,
 			browserID:      23,
@@ -1238,6 +1238,22 @@ func Test_Parses(t *testing.T) {
 			mobile:         false,
 			bot:            true,
 		},
+
+		// miss end of string looking for a version
+
+		{
+			ua:             "Android ",
+			deviceID:       4,
+			platformID:     2,
+			browserID:      0,
+			browserVersion: "",
+			botID:          0,
+			botVersion:     "",
+			osID:           7,
+			osVersion:      "",
+			mobile:         true,
+			bot:            false,
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -1278,7 +1294,5 @@ func Test_Parses(t *testing.T) {
 				fmt.Println("out:", ua)
 			}
 		}
-
 	}
-
 }

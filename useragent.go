@@ -24,7 +24,7 @@ func (u *UserAgent) parse(input string) {
 	u.parseBrowser()
 	u.parseBot() // is a bot?
 
-	if u.browserID == 0 {
+	if u.browserID == 0 && u.botID == 0 {
 		// some corner cases like spotify not setting the OS always
 		u.parseOtherBrowsers()
 	}
@@ -73,10 +73,6 @@ func (u *UserAgent) parseOS() bool {
 		u.deviceID = 6
 		u.platformID = 10
 		u.osID = 11
-	case u.includes("linux"), u.includes("debian"), u.includes("ubuntu"), u.includes("x11"):
-		u.deviceID = 2
-		u.platformID = 2
-		u.osID = 2
 	case u.includes("xbox"):
 		// xbox announces itself also as windows nt, so takes preference
 		u.deviceID = 7
@@ -117,6 +113,10 @@ func (u *UserAgent) parseOS() bool {
 		u.deviceID = 7
 		u.platformID = 10
 		u.osID = 14
+	case u.includes("linux"), u.includes("debian"), u.includes("ubuntu"), u.includes("x11"):
+		u.deviceID = 2
+		u.platformID = 2
+		u.osID = 2
 	default:
 
 		// corner cases
