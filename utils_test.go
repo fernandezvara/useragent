@@ -72,6 +72,11 @@ func Test_getVersionString(t *testing.T) {
 			text:      "windows mobile ",
 			want:      "10",
 		},
+		{ // test when there is no space after version
+			useragent: "acer_S200 Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Windows Phone 6.5)",
+			text:      "windows phone ",
+			want:      "6.5",
+		},
 		{
 			useragent: "Mozilla/5.0 (Windows Mobile 10; Android 8.0.0; Microsoft; Lumia 950XL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Mobile Safari/537.36 Edge/40.15254.369",
 			text:      "android ",

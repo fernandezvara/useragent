@@ -1,6 +1,8 @@
 package useragent
 
-import "strings"
+import (
+	"strings"
+)
 
 func (u *UserAgent) includes(item string) bool {
 	_, ok := u.partsMap[item]
@@ -21,7 +23,11 @@ func (u *UserAgent) getVersionString(search string) string {
 	index += len(search) // starts: index + lenght
 	rest = u.input[index:]
 	if index2 = strings.Index(rest, " "); index2 == -1 {
-		return ""
+		// if version in on the last part of the string, there are no spaces...
+		if len(rest) == 0 {
+			return ""
+		}
+		index2 = len(rest) - 1
 	}
 
 	index2 += index // ends: start + length
