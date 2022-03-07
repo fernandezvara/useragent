@@ -66,11 +66,6 @@ func (u *UserAgent) parseOS() bool {
 		u.platformID = 4
 		u.osID = 3
 		u.osVersion = u.getVersionString("intel mac os x ")
-	case u.includes("android"):
-		u.deviceID = 4
-		u.platformID = 2
-		u.osID = 7
-		u.osVersion = u.getVersionString("android ")
 	case u.includes("cros"):
 		u.deviceID = 2
 		u.platformID = 2
@@ -92,15 +87,22 @@ func (u *UserAgent) parseOS() bool {
 		u.deviceID = 7
 		u.platformID = 10
 		u.osID = 13
+	case u.includes("windows") && (u.includes("phone") || u.includes("mobile")):
+		u.platformID = 9
+		u.deviceID = 4
+		u.osID = 5
+		u.osVersion = u.getVersionString("windows phone os ")
+		if u.osVersion == "" {
+			u.osVersion = u.getVersionString("windows phone ")
+		}
+		if u.osVersion == "" {
+			u.osVersion = u.getVersionString("windows mobile ")
+		}
 	case u.includes("windows") && u.includes("nt"):
 		u.deviceID = 2
 		u.platformID = 3
 		u.osID = 6
 		u.osVersion = u.getVersionString("windows nt ")
-	case u.includes("windows") && (u.includes("phone") || u.includes("mobile")):
-		u.platformID = 9
-		u.deviceID = 4
-		u.osID = 5
 	case u.includes("blackberry"), u.includes("bb10"), u.includes("playbook"):
 		u.deviceID = 4
 		u.platformID = 8
@@ -127,6 +129,11 @@ func (u *UserAgent) parseOS() bool {
 		u.deviceID = 7
 		u.platformID = 10
 		u.osID = 14
+	case u.includes("android"):
+		u.deviceID = 4
+		u.platformID = 2
+		u.osID = 7
+		u.osVersion = u.getVersionString("android ")
 	case u.includes("linux"), u.includes("debian"), u.includes("ubuntu"), u.includes("x11"):
 		u.deviceID = 2
 		u.platformID = 2
@@ -159,7 +166,7 @@ func (u *UserAgent) parseBrowser() {
 	case 4:
 		u.parseiOs()
 	case 5: // windows phone
-		// TODO:!
+		u.parseWindowsPhone()
 	case 6:
 		u.parseWindows()
 	case 7:
@@ -315,6 +322,20 @@ func (u *UserAgent) parseMacOs() {
 		u.browserID = 3
 	case u.includes("applewebkit"):
 		u.browserID = 9
+	}
+}
+
+func (u *UserAgent) parseWindowsPhone() {
+	switch {
+	case u.includes("iemobile"):
+		u.browserVersion = u.partsMap["iemobile"]
+		u.browserID = 2
+	case u.includes("msie"):
+		u.browserVersion = u.getVersionString("msie ")
+		u.browserID = 2
+	case u.includes("edge"):
+		u.browserVersion = u.partsMap["edge"]
+		u.browserID = 8
 	}
 }
 
