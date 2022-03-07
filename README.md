@@ -1,8 +1,6 @@
-# useragent
+# User-Agent parser
 
-User Agent parser
-
-This package parses the browser **User Agent** received getting (with best effort) this information (when possible):
+This package parses the browser **User-Agent** received getting (with the best effort) this information (when possible):
 
 - Platform
 - Device
@@ -17,6 +15,8 @@ go get github.com/fernandezvara/useragent
 ```
 
 # Sample usage
+
+### Parse **user agent** string.
 
 ```go
 package main
@@ -52,4 +52,44 @@ func main() {
 
 }
 
+```
+
+### From IDs
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/fernandezvara/useragent"
+)
+
+func main() {
+
+	var deviceID, platformID, browserID, osID, botID int = 4, 2, 1, 7, 0
+	var browserVersion, osVersion, botVersion string = "99.0.4844.48", "10", ""
+
+	example2 := useragent.ParseIDs(deviceID, platformID, browserID, osID, botID, browserVersion, osVersion, botVersion)
+
+	fmt.Println(example2.Device().ID())        // 4
+	fmt.Println(example2.Device().String())    // Phone
+	fmt.Println(example2.Platform().ID())      // 2
+	fmt.Println(example2.Platform().String())  // Linux
+	fmt.Println(example2.Browser().ID())       // 1
+	fmt.Println(example2.Browser().String())   // Chrome
+	fmt.Println(example2.Browser().Version())  // 99.0.4844.48
+	fmt.Println(example2.Browser().IsBot())    // false
+	fmt.Println(example2.Browser().IsMobile()) // true
+	fmt.Println(example2.Bot().ID())           // 0
+	fmt.Println(example2.Bot().String())       // ""
+	fmt.Println(example2.Bot().Version())      // ""
+	fmt.Println(example2.Bot().IsBot())        // false
+	fmt.Println(example2.OS().ID())            // 7
+	fmt.Println(example2.OS().String())        // Android
+	fmt.Println(example2.OS().Version())       // 10
+	fmt.Println(example2.IsMobile())           // true
+	fmt.Println(example2.IsBot())              // false
+
+}
 ```
