@@ -9,7 +9,6 @@ type UserAgent struct {
 	botVersion     string
 	osID           int
 	osVersion      string
-	bot            bool
 	partsMap       map[string]string
 	input          string
 }
@@ -115,11 +114,11 @@ func (u UserAgent) Platform() platform {
 }
 
 func (u UserAgent) Browser() browser {
-	return browser{id: u.browserID, version: u.browserVersion, bot: u.bot, mobile: u.IsMobile()}
+	return browser{id: u.browserID, version: u.browserVersion, bot: u.IsBot(), mobile: u.IsMobile()}
 }
 
 func (u UserAgent) Bot() bot {
-	return bot{id: u.botID, version: u.botVersion, bot: u.bot}
+	return bot{id: u.botID, version: u.botVersion, bot: u.IsBot()}
 }
 
 func (u UserAgent) OS() osStruct {
@@ -131,7 +130,7 @@ func (u UserAgent) IsMobile() bool {
 }
 
 func (u UserAgent) IsBot() bool {
-	return u.bot
+	return u.botID != 0
 }
 
 type device struct {

@@ -1296,3 +1296,47 @@ func Test_Parses(t *testing.T) {
 		}
 	}
 }
+
+func Test_ParseIDs(t *testing.T) {
+
+	//      ua:             "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.48 Mobile Safari/537.36",
+	// 		deviceID:       4,
+	// 		platformID:     2,
+	// 		browserID:      1,
+	// 		browserVersion: "99.0.4844.48",
+	// 		osID:           7,
+	// 		osVersion:      "10",
+	// 		mobile:         true,
+	// 		bot:            false,
+
+	var deviceID, platformID, browserID, osID, botID int = 4, 2, 1, 7, 0
+	var browserVersion, osVersion, botVersion string = "99.0.4844.48", "10", ""
+	var mobile, bot = true, false
+
+	ua := ParseIDs(deviceID, platformID, browserID, osID, botID, browserVersion, osVersion, botVersion)
+
+	assert.Equal(t, deviceID, ua.Device().ID())
+	assert.Equal(t, Devices[deviceID], ua.Device().String())
+	// test platforms
+	assert.Equal(t, platformID, ua.Platform().ID())
+	assert.Equal(t, Platforms[platformID], ua.Platform().String())
+	// test browsers
+	assert.Equal(t, browserID, ua.Browser().ID())
+	assert.Equal(t, Browsers[browserID], ua.Browser().String())
+	assert.Equal(t, browserVersion, ua.Browser().Version())
+	assert.Equal(t, bot, ua.Browser().IsBot())
+	assert.Equal(t, mobile, ua.Browser().IsMobile())
+	// test bot
+	assert.Equal(t, botID, ua.Bot().ID())
+	assert.Equal(t, Bots[botID], ua.Bot().String())
+	assert.Equal(t, botVersion, ua.Bot().Version())
+	assert.Equal(t, bot, ua.Bot().IsBot())
+	// test os
+	assert.Equal(t, osID, ua.OS().ID())
+	assert.Equal(t, OSs[osID], ua.OS().String())
+	assert.Equal(t, osVersion, ua.OS().Version())
+	// test booleans
+	assert.Equal(t, mobile, ua.IsMobile())
+	assert.Equal(t, bot, ua.IsBot())
+
+}

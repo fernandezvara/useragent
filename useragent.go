@@ -7,11 +7,25 @@ import (
 
 // Parse gets the raw user agent and returns a usable UserAgent
 func Parse(input string) *UserAgent {
-	var (
-		ua UserAgent
-	)
+	var ua UserAgent
 
 	ua.parse(strings.ToLower(input))
+	return &ua
+}
+
+// ParseIDs creates an user agent from previous answers of the library
+func ParseIDs(deviceID, platformID, browserID, osID, botID int, browserVersion, osVersion, botVersion string) *UserAgent {
+	var ua UserAgent
+
+	ua.deviceID = deviceID
+	ua.platformID = platformID
+	ua.browserID = browserID
+	ua.browserVersion = browserVersion
+	ua.osID = osID
+	ua.osVersion = osVersion
+	ua.botID = botID
+	ua.botVersion = botVersion
+
 	return &ua
 }
 
@@ -437,60 +451,49 @@ func (u *UserAgent) parseBot() bool {
 	case u.includes("applebot"):
 		u.botID = 2
 		u.botVersion = u.partsMap["applebot"]
-		u.bot = true
 	case u.includes("baiduspider"):
 		u.botID = 3
 		u.botVersion = u.partsMap["baiduspider"]
-		u.bot = true
 	case u.includes("baiduspider+"):
 		u.botID = 3
-		u.bot = true
 		u.botVersion = u.partsMap["baiduspider+"]
 	case u.includes("baiduspider-render"):
 		u.botID = 3
-		u.bot = true
 		u.botVersion = u.partsMap["baiduspider-render"]
 	case u.includes("bingbot"):
 		u.botID = 4
-		u.bot = true
 		u.botVersion = u.partsMap["bingbot"]
 	case u.includes("duckduckgo"):
 		u.botID = 5
-		u.bot = true
 		u.botVersion = u.partsMap["duckduckgo"]
 	case u.includes("duckduckbot"):
 		u.botID = 5
-		u.bot = true
 		u.botVersion = u.partsMap["duckduckbot"]
 	case u.includes("facebookexternalhit"):
 		u.botID = 6
-		u.bot = true
 		u.botVersion = u.partsMap["facebookexternalhit"]
 	case u.includes("googlebot"):
 		u.botID = 7
-		u.bot = true
 		u.botVersion = u.partsMap["googlebot"]
 	case u.includes("linkedinbot"):
 		u.botID = 8
-		u.bot = true
 		u.botVersion = u.partsMap["linkedinbot"]
 	}
 
 	// duck duck bot is way unpredectible...
 	if strings.Contains(u.input, "duckduck") && !u.includes("duckduckgo") {
 		u.botID = 5
-		u.bot = true
 	}
 
-	if u.bot && u.deviceID == 0 {
+	if u.botID != 0 && u.deviceID == 0 {
 		u.deviceID = 1
 	}
-	if u.bot && u.platformID == 0 {
+	if u.botID != 0 && u.platformID == 0 {
 		u.platformID = 1
 	}
-	if u.bot && u.osID == 0 {
+	if u.botID != 0 && u.osID == 0 {
 		u.osID = 1
 	}
 
-	return u.bot
+	return u.botID != 0
 }
